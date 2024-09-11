@@ -68,7 +68,7 @@ false. (We have a note to clean this up.)
 -/
 
 #eval! (truthTableOutputVector (P))
-#eval! (truthTableOutputVector (P ∨ Q))
+#eval! (truthTableOutputVector (P ∧ Q))
 
 
 /-!
@@ -118,11 +118,6 @@ express it formally using these PL variable expressions.
 Here then are our three new PL variable expressions. The
 identifer's we're binding to these terms remind us what
 we are going to want these terms to mean "in the world."
-stat2120 - 4
-multi - 4
-dsa 2 - 4
-probability - 3
-
 -/
 
 def itsRaining : PLExpr := PLExpr.var_expr v₀
@@ -139,12 +134,12 @@ the pattern of p0, p1, p2, as seen below.
 /-!
 It's raining and the sprinkler's on.
 -/
-def p0 : PLExpr := (itsRaining ∧ sprinklerOn)
+def p0 : PLExpr := itsRaining ∧ sprinklerOn
 
 /-!
-The sprinkler's on and it's raining.
+The sprinler's on and it's raining.
 -/
-def p1  : PLExpr := sprinklerOn ∧ itsRaining
+def p1  : PLExpr := itsRaining ∧ sprinklerOn
 
 /-!
 If it's raining, then if the sprinkler's on, then it's
@@ -153,7 +148,7 @@ then that) expressions in natural language are written
 formally in propositional and predicate logic using the
 implication (implies) operator, imp (⇒ in our notation).
 -/
-def p2  : PLExpr := itsRaining ⇒ sprinklerOn ⇒ p0
+def p2  : PLExpr := itsRaining 
 
 /-!
 If it's raining and the sprinkler's running, then it's raining.
@@ -168,7 +163,7 @@ def p4  : PLExpr := itsRaining ⇒ (itsRaining ∨ sprinklerOn)
 /-!
 If the sprinkler's running, it's raining or the sprinkler's running. ⇒ ∧ v
 -/
-def p5  : PLExpr := (sprinklerOn) ∧  (itsRaining ∨  sprinklerOn)
+def p5  : PLExpr := sprinklerOn ∧ (itsRaining v sprinklerOn)
 
 /-!
 Whenever it's raining the streets are wet.
@@ -187,7 +182,7 @@ whenever it's raining then the streets are wet, then (c) if
 whenever the sprinkler's running then the streets are wet, then
 _________. What is the conclusion? Write the expression in PL.
 -/
-def p8  : PLExpr := (itsRaining ∨ sprinklerOn) ⇒ ((itsRaining ⇒ streetWet) ⇒ (sprinklerOn ⇒ streetWet) ⇒ streetWet)
+def p8  : PLExpr := (itsRaining v sprinklerOn) ⇒ ((itsRaining ⇒ streetWet) ⇒ (sprinklerOn ⇒ streetWet) ⇒ streetWet)
 
 /-!
 If whenever it's raining, the streets are wet, then whenever the
