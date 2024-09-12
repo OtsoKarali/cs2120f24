@@ -78,17 +78,15 @@ returning the Boolean meaining of e in the "world" (binding
 of all variables to Boolean values) expressed by that i.
 -/
 
-def evalBoolExpr : PLExpr → BoolInterp → Bool
+def evalPLExpr : PLExpr → BoolInterp → Bool
 | lit_expr b,             _ => b
 | (var_expr v),           i => i v
-| (un_op_expr op e),      i => (evalUnOp op) (evalBoolExpr e i)
-| (bin_op_expr op e1 e2), i => (evalBinOp op) (evalBoolExpr e1 i) (evalBoolExpr e2 i)
+| (un_op_expr op e),      i => (evalUnOp op) (evalPLExpr e i)
+| (bin_op_expr op e1 e2), i => (evalBinOp op) (evalPLExpr e1 i) (evalPLExpr e2 i)
 
 /-!
 That's it. From this material you should be able to aquire
-a justifiably confidenct grasp of essentially every aspect
-of  its syntax and semantics of propositional logic. We have
-yet to address fundamental *properties of expressions in
-propositional logic. That's coming next.
+a justifiably confident grasp of essentially every aspect
+of the syntax and semantics of propositional logic.
 -/
 end cs2120f24
