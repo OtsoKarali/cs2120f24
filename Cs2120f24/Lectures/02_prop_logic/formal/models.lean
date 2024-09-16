@@ -10,12 +10,12 @@ namespace cs2120f24
 As a final chapter in our unit on propositional logic, we
 now present the concepts of models and counter-examples.
 
-Given a proposition in propositional logic (a PLExpr), call
-it e, we know that if we're also given any interpretation for
-it, i, the our semantic evalation function, eval_expr applied
-to e an i as arguments ("actual" parameters), returns the truth
-value of e as it applies to "the state of affairs in the world"
-represented by i.
+Given a proposition (PLExpr), e, and an interpretation for
+the variables in e, we can apply our semantic evalation
+function, evalPLExpr, to e and i, to compute the truth
+value of the proposition, e, when understood to be about
+the "situation" or "world" or "state of affairs" described
+by i.
 -/
 
 
@@ -217,8 +217,13 @@ together a method for finding a counterexample if there is one?
 def findCounterExample : PLExpr → Option BoolInterp
 | e => findModel ¬e
 
-#reduce match (findCounterExample e) with | none => [] | some i => listBitStringFromInterp i (numVarsFromExpr e)
-#reduce match (findCounterExample ¬e) with | none => [] | some i => listBitStringFromInterp i (numVarsFromExpr ¬e)
+#reduce match (findCounterExample e) with
+  | none => []
+  | some i => listBitStringFromInterp i (numVarsFromExpr e)
+
+#reduce match (findCounterExample ¬e) with
+  | none => []
+  | some i => listBitStringFromInterp i (numVarsFromExpr ¬e)
 
 
 end cs2120f24
